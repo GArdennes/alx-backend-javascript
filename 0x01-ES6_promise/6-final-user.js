@@ -1,16 +1,14 @@
-import uploadPhoto from "./5-photo-reject.js";
-import signUpUser from "./4-user-promise.js";
+import uploadPhoto from './5-photo-reject.js'; // eslint-disable-line import/extensions
+import signUpUser from './4-user-promise.js'; // eslint-disable-line import/extensions
 
-export function handleProfileSignup(firstName, lastName, fileName) {
+export default function handleProfileSignup(firstName, lastName, fileName) {
   return Promise.all([uploadPhoto(fileName), signUpUser(firstName, lastName)])
     .then((results) => {
-      const formattedResults = results.map((result, index) => ({
-        status: result.isFulfilled ? "resolved" : "rejected",
-        value: result.value,
+      const formattedResults = results.map((result) => ({
+        status: result.status ? 'resolved' : 'rejected',
+        value: result.status === 'fulfilled' ? results.value : String(results.reason),
       }));
       return formattedResults;
     })
-    .catch((error) => {
-      return [{ status: "rejected", value: error }];
-    });
+    .catch((error) => [{ status: 'rejected', value: error }]);
 }
