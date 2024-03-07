@@ -1,5 +1,4 @@
-import uploadPhoto from "./utils.js";
-import createUser from "./utils.js";
+import { uploadPhoto, createUser } from './utils.js'; // eslint-disable-line import/extensions
 
 export default async function asyncUploadUser() {
   try {
@@ -7,7 +6,7 @@ export default async function asyncUploadUser() {
     const user = await createUser();
     return { photo, user };
   } catch (error) {
-    console.error("Error during async operations:", error);
+    console.error('Error during async operations:', error);
     return { photo: null, user: null };
   }
 }
