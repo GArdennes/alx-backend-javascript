@@ -6,8 +6,12 @@ export default class Building {
     this._sqft = sqft;
 
     // Prevent direct instantiation of the abstract class
-    if (this.constructor === Building) {
-      throw new Error('Cannot create instances of abstract class Building');
+    if (this.constructor !== Building) {
+      if (typeof this.evacuationWarningMessage !== 'function') {
+        throw new Error(
+          'Class extending Building must override evacuationWarningMessage',
+        );
+      }
     }
   }
 
@@ -15,8 +19,7 @@ export default class Building {
     return this._sqft;
   }
 
-  // Abstract method declaration
-  evacuationWarningMessage() { // eslint-disable-line class-methods-use-this
-    throw new Error('Abstract method evacuationWarningMessage must be implemented in subclasses');
+  set sqft(value) {
+    this._sqft = value;
   }
 }
