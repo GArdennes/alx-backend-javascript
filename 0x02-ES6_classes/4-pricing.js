@@ -12,6 +12,28 @@ export default class Pricing {
     this._currency = currency;
   }
 
+  get amount() {
+    return this._amount;
+  }
+
+  set amount(newAmount){
+    if (typeof value !== 'number'){
+      throw new TypeError('amount must be a number');
+    }
+    this._amount = newAmount;
+  }
+
+  get currency() {
+    return this._currency;
+  }
+
+  set currency(newCurrency) {
+    if (!(newCurrency instanceof Currency)){
+      throw new TypeError('currency must be a Currency');
+    }
+    this._currency = newCurrency;
+  }
+
   displayFullPrice() {
     return `${this._amount} ${this._currency.displayFullCurrency()}`;
   }
