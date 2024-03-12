@@ -1,4 +1,7 @@
 export default function cleanSet(set, startString) {
+  if (startString === '') {
+    return '';
+  }
   const matchingValues = [];
   for (const value of set) {
     if (value.startsWith(startString)) {
